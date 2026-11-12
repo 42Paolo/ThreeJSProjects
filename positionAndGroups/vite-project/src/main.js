@@ -14,7 +14,7 @@ camera.position.z = 1;
 renderer.setSize(sizes.width, sizes.height);
 
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({color:'#00ff00'});
+const material = new THREE.MeshNormalMaterial();
 
 const mesh = new THREE.Mesh(geometry, material)
 const mesh2 = mesh.clone();
@@ -38,21 +38,31 @@ function tip(timestamp){
   
   let elapsedtTime = timer.getElapsed();
   let deltaTime = timer.getDelta();
-  
+ 
+
   groupRotate(deltaTime);
+  fluidCube(elapsedtTime, groupMesh);
+
   
   renderer.render(scene, camera);
   requestAnimationFrame(tip)
 }
 
+function fluidCube(elapsedTime, meshCube){
+  meshCube.children.slice(1, 3).forEach(child => {
+    child.position.y = Math.sin(elapsedTime);
+  });
+}
 
 function groupRotate(deltaTime){
-  groupMesh.rotateX(Math.sin(deltaTime));
+  groupMesh.children.forEach(child => {
+    child.rotateX(deltaTime);
+    child.rotateY(deltaTime);
+  });
 }
 
 requestAnimationFrame(tip)
 scene.add(groupMesh);
-
 
 document.body.appendChild(renderer.domElement);
 renderer.render(scene, camera);
