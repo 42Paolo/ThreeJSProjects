@@ -28,6 +28,29 @@ const groupMesh = new THREE.Group();
 groupMesh.add(mesh, mesh2, mesh3);
 groupMesh.position.z = -5;
 
+const timer = new THREE.Timer();
+timer.connect(document);
+
+
+function tip(timestamp){
+
+  timer.update(timestamp);  
+  
+  let elapsedtTime = timer.getElapsed();
+  let deltaTime = timer.getDelta();
+  
+  groupRotate(deltaTime);
+  
+  renderer.render(scene, camera);
+  requestAnimationFrame(tip)
+}
+
+
+function groupRotate(deltaTime){
+  groupMesh.rotateX(Math.sin(deltaTime));
+}
+
+requestAnimationFrame(tip)
 scene.add(groupMesh);
 
 
