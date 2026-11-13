@@ -18,6 +18,7 @@ Una raccolta di piccoli esperimenti con **Three.js** per studiare le basi della 
 | --- | --- |
 | [animationCube](#animationcube) | Mesh, `Timer`, animation loop, rotazione e oscillazione |
 | [positionAndGroups](#positionandgroups) | `clone()`, posizionamento, `THREE.Group`, animazione dei figli |
+| [floatSinCubes](#floatsincubes) | Creazione di cubi con un ciclo, `userData`, fluttuazione con `Math.sin` e fase casuale |
 
 ---
 
@@ -55,6 +56,24 @@ Tre cubi clonati da una stessa mesh, posizionati lungo l'asse X e raggruppati in
 
 ---
 
+### floatSinCubes
+
+<p align="center">
+  <img src="GIFAnimation/floatSinCubes.gif" alt="floatSinCubes demo" width="600">
+</p>
+
+Una fila di 10 cubi creati con un ciclo `for`, che fluttuano ognuno con un ritmo diverso e ruotano su se stessi.
+
+- **`cubeCreate()`** genera i cubi e li mette in un `THREE.Group`
+- **Centratura della fila** con `(i - (count - 1) / 2) * spacing`
+- **`userData.offSet`** salva in ogni cubo una fase casuale tra 0 e 2π
+- **Fluttuazione** con `Math.sin(elapsedTime + offSet)`: stesso movimento, ma sfasato per ogni cubo
+- **Configurazione** centralizzata nell'oggetto `cubeConfig` (numero, spaziatura, velocità)
+
+📁 [`floatSinCubes/vite-project/src/main.js`](floatSinCubes/vite-project/src/main.js)
+
+---
+
 ## Avvio rapido
 
 **Requisiti:** Node.js 18+ e npm
@@ -82,7 +101,10 @@ ThreeJsStudio/
 ├── animationCube/
 │   └── vite-project/
 │       └── src/main.js
-└── positionAndGroups/
+├── positionAndGroups/
+│   └── vite-project/
+│       └── src/main.js
+└── floatSinCubes/
     └── vite-project/
         └── src/main.js
 ```

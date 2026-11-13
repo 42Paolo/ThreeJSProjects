@@ -25,7 +25,7 @@ function tip(timestamp)
   let elapsedTime = timer.getElapsed();
   let currentTime = timer.getDelta();
 
-  mesh.position.y = Math.sin(elapsedTime * velCube);
+  mesh.position.y = Math.sin(elapsedTime * velCube) * 0.5;
   
   mesh.rotateX(Math.sin(currentTime));
   mesh.rotateY(Math.sin(currentTime));
