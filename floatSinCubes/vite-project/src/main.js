@@ -8,7 +8,8 @@ const sizes = {
 const cubeConfig = {
   count: 10,
   spacing: 2.5,
-  speed: 1,
+  rXspeed: 0.01,
+  rYspeed: 0.02,
   x: 1,
   y: 1,
   z: 1,
@@ -41,6 +42,7 @@ function cubeCreate({count, spacing}){
     // esempio di i = 5 verrebbe (10 - (9 / 2)) * 1.5
     cube.position.x = (i - (count - 1) / 2) * spacing; 
     cube.userData.index = i;
+    cube.userData.offSet = Math.random() * Math.PI * 2;
     meshGroup.add(cube); 
   }
 
@@ -67,7 +69,9 @@ function tip(timestamp){
 
 function eachCubeDifferentFloat(elapsedTime){
   cubes.children.forEach(element => {
-    element.position.y = Math.sin(elapsedTime);
+    element.position.y = Math.sin(elapsedTime + element.userData.offSet);
+    element.rotateX(cubeConfig.rXspeed);
+    element.rotateY(cubeConfig.rYspeed);
   });
 }
 
