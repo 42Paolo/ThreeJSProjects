@@ -21,6 +21,7 @@ Una raccolta di piccoli esperimenti con **Three.js** per studiare le basi della 
 | [floatSinCubes](#floatsincubes) | Creazione di cubi con un ciclo, `userData`, fluttuazione con `Math.sin` e fase casuale |
 | [followTarget](#followtarget) | Moto circolare con `Math.cos` / `Math.sin`, orbita attorno a un'altra mesh |
 | [diffHeightBoxes](#diffheightboxes) | Griglia 6×6 con cicli annidati, altezze casuali, `ArcballControls`, `pixelRatio` |
+| [flyControls](#flycontrols) | `FlyControls`, camera libera con mouse e tastiera, `resize` della finestra |
 
 ---
 
@@ -111,6 +112,24 @@ Una griglia 6×6 di 36 box con altezza casuale, che si può ruotare e zoomare li
 
 ---
 
+### flyControls
+
+<p align="center">
+  <img src="GIFAnimation/flyControls.gif" alt="flyControls demo" width="600">
+</p>
+
+La stessa griglia 6×6 di box con altezza casuale, ma esplorata come in un volo: la camera si muove liberamente tra i box.
+
+- **`FlyControls`** per volare nella scena: tastiera per muoversi, mouse per orientare la camera
+- **`dragToLook`** attivo: la camera ruota solo tenendo premuto il mouse; `movementSpeed` e `rollSpeed` regolano velocità e rollio
+- **`THREE.Timer`** con `getDelta()` passato a `controls.update()`, così il movimento non dipende dagli FPS
+- **Centratura della griglia** con `i * 2 - offset`, dove `offset = size - 1`
+- **Evento `resize`** che aggiorna `aspect`, `updateProjectionMatrix()` e `setSize()` per adattare la scena alla finestra
+
+📁 [`flyControls/vite-project/src/main.js`](flyControls/vite-project/src/main.js)
+
+---
+
 ## Avvio rapido
 
 **Requisiti:** Node.js 18+ e npm
@@ -147,7 +166,10 @@ ThreeJsStudio/
 ├── followTarget/
 │   └── vite-project/
 │       └── src/main.js
-└── diffHeightBoxes/
+├── diffHeightBoxes/
+│   └── vite-project/
+│       └── src/main.js
+└── flyControls/
     └── vite-project/
         └── src/main.js
 ```
