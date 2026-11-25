@@ -20,6 +20,7 @@ Una raccolta di piccoli esperimenti con **Three.js** per studiare le basi della 
 | [positionAndGroups](#positionandgroups) | `clone()`, posizionamento, `THREE.Group`, animazione dei figli |
 | [floatSinCubes](#floatsincubes) | Creazione di cubi con un ciclo, `userData`, fluttuazione con `Math.sin` e fase casuale |
 | [followTarget](#followtarget) | Moto circolare con `Math.cos` / `Math.sin`, orbita attorno a un'altra mesh |
+| [diffHeightBoxes](#diffheightboxes) | Griglia 6×6 con cicli annidati, altezze casuali, `ArcballControls`, `pixelRatio` |
 
 ---
 
@@ -92,6 +93,24 @@ Un cubo che orbita attorno a un altro cubo fermo al centro, come un pianeta atto
 
 ---
 
+### diffHeightBoxes
+
+<p align="center">
+  <img src="GIFAnimation/diffHeightBoxes.gif" alt="diffHeightBoxes demo" width="600">
+</p>
+
+Una griglia 6×6 di 36 box con altezza casuale, che si può ruotare e zoomare liberamente con il mouse.
+
+- **Cicli annidati** `for i` / `for j` per creare le 36 mesh e posizionarle sulla griglia
+- **Altezza casuale** con `Math.random() * 4 + 1` e `BoxGeometry(1, height, 1)`
+- **`position.y = height / 2`** così ogni box poggia sul piano, qualunque sia la sua altezza
+- **`ArcballControls`** per orbitare, spostare e zoomare la scena, con il render loop `tick()`
+- **Render più nitido** con `antialias`, `logarithmicDepthBuffer` e `setPixelRatio` limitato a 2
+
+📁 [`diffHeightBoxes/vite-project/src/main.js`](diffHeightBoxes/vite-project/src/main.js)
+
+---
+
 ## Avvio rapido
 
 **Requisiti:** Node.js 18+ e npm
@@ -125,7 +144,10 @@ ThreeJsStudio/
 ├── floatSinCubes/
 │   └── vite-project/
 │       └── src/main.js
-└── followTarget/
+├── followTarget/
+│   └── vite-project/
+│       └── src/main.js
+└── diffHeightBoxes/
     └── vite-project/
         └── src/main.js
 ```
