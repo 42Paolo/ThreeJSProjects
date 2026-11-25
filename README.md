@@ -22,6 +22,7 @@ Una raccolta di piccoli esperimenti con **Three.js** per studiare le basi della 
 | [followTarget](#followtarget) | Moto circolare con `Math.cos` / `Math.sin`, orbita attorno a un'altra mesh |
 | [diffHeightBoxes](#diffheightboxes) | Griglia 6×6 con cicli annidati, altezze casuali, `ArcballControls`, `pixelRatio` |
 | [flyControls](#flycontrols) | `FlyControls`, camera libera con mouse e tastiera, `resize` della finestra |
+| [orbitControls](#orbitcontrols) | `OrbitControls`, orbita attorno alla scena, `enableDamping` per l'inerzia |
 
 ---
 
@@ -130,6 +131,24 @@ La stessa griglia 6×6 di box con altezza casuale, ma esplorata come in un volo:
 
 ---
 
+### orbitControls
+
+<p align="center">
+  <img src="GIFAnimation/orbitControls.gif" alt="orbitControls demo" width="600">
+</p>
+
+La griglia 6×6 di box con altezza casuale, osservata ruotando la camera attorno al centro della scena.
+
+- **`OrbitControls`** per orbitare con il mouse, zoomare con la rotella e spostare la vista con il tasto destro
+- **`enableDamping`** aggiunge inerzia: la camera continua a muoversi dolcemente dopo che rilasci il mouse
+- **`controls.update(deltaTime)`** va chiamato a ogni frame nel loop, altrimenti il damping non funziona
+- **`THREE.Timer`** fornisce il delta tra i frame, come in `flyControls`
+- **Differenza con `flyControls`**: qui la camera orbita attorno a un punto fisso, lì vola libera nello spazio
+
+📁 [`orbitControls/vite-project/src/main.js`](orbitControls/vite-project/src/main.js)
+
+---
+
 ## Avvio rapido
 
 **Requisiti:** Node.js 18+ e npm
@@ -169,7 +188,10 @@ ThreeJsStudio/
 ├── diffHeightBoxes/
 │   └── vite-project/
 │       └── src/main.js
-└── flyControls/
+├── flyControls/
+│   └── vite-project/
+│       └── src/main.js
+└── orbitControls/
     └── vite-project/
         └── src/main.js
 ```
